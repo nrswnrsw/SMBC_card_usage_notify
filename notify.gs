@@ -44,7 +44,7 @@ function getCreditCardUsage() {
 function extractAmountFromHtml(html) {
   try {
     var cleanedHtml = HtmlService.createHtmlOutput(html).getContent();
-    var amountPattern = /<td[^>]*font-size:36px;[^>]*color:#00846D[^>]*>([\d,]+)円<\/td>/;
+    var amountPattern = /<td[^>]*font-size:36px;[^>]*color:#00846D[^>]*>(-?[\d,]+)円<\/td>/;
     var match = cleanedHtml.match(amountPattern);
 
     if (match) {
@@ -52,7 +52,7 @@ function extractAmountFromHtml(html) {
     }
     return 0;
   } catch (e) {
-    Logger.log("HTML parsing error: " + e);
+    Logger.log("HTML 解析エラー: " + e);
     return 0;
   }
 }
